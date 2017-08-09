@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import SearchResults from './SearchResults';
 import searchArtists from '../js/searchartists';
 
-//Main will the search bar, and a results component
-/*What will this need?
-   -will need to handle when the user types, do the search/filter
-   -set the state with the results
-   -pass along the results from the state to the results container
-*/
 export default class MainContainer extends Component {
     constructor(props) {
         super(props);
@@ -38,6 +32,7 @@ export default class MainContainer extends Component {
                 })
             }).catch((err) => {
                 //TODO create error dialog system
+                console.log(err);
                 alert(err);
             });
         }, 500);

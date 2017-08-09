@@ -7,10 +7,11 @@ export default class SearchResultsContainer extends Component {
 }
 
 const SearchResults = ({ results }) => {
+    let count = 1;
     return (
         <ol>
             { results.map(result => {
-                return <Result key={result.id} descr={result.name} />;
+                return <Result key={count++} descr={result.Name} />;
             })}
         </ol>
     )
