@@ -49,9 +49,9 @@ export default (query) => {
 
     //Perform the ajax call
     const q = encodeURIComponent(query);
-    return testFetch(`${URI}/player?q=${q}`).then((response) => {
+    return fetch(`${URI}/player?q=${q}`).then((response) => {
         if (!response.ok) {
-            throw `Error retriving player results: ${response.statusText}`;
+            throw new Error(`Error retriving player results: ${response.statusText}`);
         }
         return response.json();
     }).then((data) => {

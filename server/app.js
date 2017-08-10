@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 });
 app.use(_express2.default.static(_path2.default.join(__dirname, '..', 'build')));
 
-const buildErrResp = (code, msg) => {
+const buildErrResp = msg => {
   const payload = {
     msg: msg
   };

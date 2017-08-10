@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import Spinner from './Spinner';
 import '../css/searchresults.css';
 import '../css/skeleton.css';
 
 export default class SearchResultsContainer extends Component {
     render() {
-        return React.createElement(SearchResults, { results: this.props.results });
+        return React.createElement(SearchResults, { results: this.props.results, loading: this.props.loading });
     }
 }
 
-const SearchResults = ({ results }) => {
+const SearchResults = ({ results, loading }) => {
     let count = 1;
     return (
         <ol className="Results-base container">
+            <Spinner visible={loading} />
             <div className="Results-header row">
                 <div className="four columns">Name</div>
                 <div className="four columns">Position</div>

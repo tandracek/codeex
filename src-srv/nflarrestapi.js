@@ -24,30 +24,43 @@ const positions = {
 const resolvePosition = (pos) => {
     if (!positions[pos])
         return pos;
-    return position[pos];
+    return positions[pos];
+}
+const formatPlayerData = (data) => {
+    data.forEach((p) => {
+        const names = p.Name.split(" ");
+        const firstName = names.splice(0, 1);
+        const formatted = `${names.join(' ')}, ${firstName}`;
+        p.Name = formatted;
+        p.FullPosition = resolvePosition(p.Position);
+    });
+    return data.sort((p1, p2) => p1.Name.localeCompare(p2.Name));
 }
 const runFetch = (url) => {
     if (!url || !url.length)
         return Promise.reject("No url provided for fetch");
 
+    console.log(`Retrieving results from: ${url}`);
     return fetch(url).then((resp) => {
         if (!resp.ok) {
+            console.log(`Error retrieving from ${url}: ${resp.statusText}`);
             throw `Error retriving results: ${resp.statusText}`;
         }
         return resp.json();
-    }).then((data) => {
-        data.forEach((p) => {
-            p.FullPosition = resolvePosition(p.Position);
-        });
-        return data.sort((p1, p2) => p1.Name.localeCompare(p2.Name));
     });
 }
-export default {
+const API = {
+    performFetch: (url) => {
+        return runFetch(url);
+    },
     searchPlayer: (query) => {
         if (!query || !query.length)
             return Promise.resolve([]);
 
         const fullUrl = `${URL.player}/search/?term=${query}`;
-        return runFetch(fullUrl);
+        return API.performFetch(fullUrl).then((data) => {
+            return formatPlayerData(data);
+        });
     }
 }
+export default API;

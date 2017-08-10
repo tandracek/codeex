@@ -1,15 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "192x192",
-      "type": "image/png"
-    }
-  ],
+  "short_name": "Nfl Arrest Search",
+  "name": "Search Nfl Players Arrest Record",
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#013369",
+  "background_color": "#013369"
 }
