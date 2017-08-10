@@ -12,12 +12,12 @@ node server
 
 #### Libraries/Frameworks used
 ##### Frontend
--React
--react-responsive-modal for displaying a modal for error messages
--babel for using certain es6 features
+- React
+- react-responsive-modal for displaying a modal for error messages
+- babel for using certain es6 features
 
 ##### Backend
--Express
--node-fetch for making the call to the API
--mocha for testing
--sinon also for testing
+- Express
+- node-fetch for making the call to the API
+- mocha for testing
+- sinon also for testing
