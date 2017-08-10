@@ -1,0 +1,28 @@
+.Results-base {
+    list-style-type: none;
+    text-align: left;
+}
+
+.Results-header {
+    padding: 10px;
+}
+
+.Results-item {
+    padding: 10px;
+    overflow: auto;
+    border-bottom: 1px solid black;
+}
+
+.Results-item .fullPos {
+    display: none;
+}
+
+@media (min-width: 550px) {
+    .Results-item .fullPos {
+        display: block;
+    }
+
+    .Results-item .pos {
+        display: none;
+    }
+}

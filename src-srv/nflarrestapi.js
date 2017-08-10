@@ -6,7 +6,26 @@ const URL = {
     team: BASE_URL + 'team'
 }
 
+const positions = {
+    QB: "Quarterback",
+    RB: "Running Back",
+    WR: "Wide Receiver",
+    TE: "Tight End",
+    OT: "Offensive Tackle",
+    OG: "Offensive Guard",
+    C: "Center",
 
+    DT: "Defensive Tackle",
+    DE: "Defensive End",
+    LB: "Line Backer",
+    CB: "Cornerback",
+    S: "Safety"
+}
+const resolvePosition = (pos) => {
+    if (!positions[pos])
+        return pos;
+    return position[pos];
+}
 const runFetch = (url) => {
     if (!url || !url.length)
         return Promise.reject("No url provided for fetch");
@@ -17,6 +36,9 @@ const runFetch = (url) => {
         }
         return resp.json();
     }).then((data) => {
+        data.forEach((p) => {
+            p.FullPosition = resolvePosition(p.Position);
+        });
         return data.sort((p1, p2) => p1.Name.localeCompare(p2.Name));
     });
 }

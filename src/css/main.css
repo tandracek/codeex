@@ -1,0 +1,13 @@
+.Main-container {
+    margin-top: 10px;
+}
+
+.Main-search {
+    width: 80%;
+}
+
+@media (min-width: 550px) {
+    .Main-search {
+        width: 40%;
+    }
+}

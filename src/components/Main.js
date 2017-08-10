@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchResults from './SearchResults';
 import searchArtists from '../js/searchartists';
+import '../css/main.css';
 
 export default class MainContainer extends Component {
     constructor(props) {
@@ -45,7 +46,7 @@ export default class MainContainer extends Component {
 const Main = ({ onKeyUp, results}) => {
     return (
         <div className="Main-container">
-            <input placeholder="Search.." onKeyUp={onKeyUp}/>
+            <input className="Main-search" type="text" placeholder="Search.." onKeyUp={onKeyUp}/>
             <SearchResults results={results} />
         </div>
     )
