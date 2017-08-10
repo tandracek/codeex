@@ -26,7 +26,7 @@ app.get('/player', (req, res) => {
   nflArrestApi.searchPlayer(req.query.q).then((data) => {
     res.send(data);
   }).catch((err) => {
-    res.status(400).send(buildErrResp(`Error retrieving players: ${err}`));
+    res.status(400).send(buildErrResp(err.message));
   });
 });
 

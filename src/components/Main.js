@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchResults from './SearchResults';
 import Modal from './Modal';
-import searchArtists from '../js/searchartists';
+import searchArtists from '../js/searcharrest';
 import '../css/main.css';
 
 export default class MainContainer extends Component {
@@ -11,6 +11,7 @@ export default class MainContainer extends Component {
             results: [],
             input: '',
             loading: false,
+            countVisible: false,
             modal: {
                 open: false,
                 title: '',
@@ -52,7 +53,8 @@ export default class MainContainer extends Component {
             searchArtists(value).then((data) => {
                 this.setState({
                     results: data,
-                    input: value
+                    input: value,
+                    countVisible: true
                 })
             }).catch((err) => {
                 console.log(err.toString());
@@ -65,15 +67,17 @@ export default class MainContainer extends Component {
         }, 500);
     }
     render() {
-        return React.createElement(Main, { onKeyUp: this.handleOnKeyUp, results: this.state.results, loading: this.state.loading, modal: this.state.modal, onModalClose: this.handleModalClose });
+        return React.createElement(Main, { onKeyUp: this.handleOnKeyUp, results: this.state.results, loading: this.state.loading, countVisible: this.state.countVisible, modal: this.state.modal, 
+            onModalClose: this.handleModalClose });
     }
 }
 
-const Main = ({ onKeyUp, results, loading, modal, onModalClose }) => {
+const Main = ({ onKeyUp, results, loading, countVisible, modal, onModalClose }) => {
     return (
         <div className="Main-container">
             <Modal open={modal.open} onClose={onModalClose} title={modal.title} descr={modal.descr} />
-            <input className="Main-search" type="text" placeholder="Search.." onKeyUp={onKeyUp}/>
+            <input className="Main-search" type="text" placeholder="Search by name.." onKeyUp={onKeyUp}/>
+            {countVisible ? <div className="Main-count">{results.length} results</div> : null }
             <SearchResults results={results} loading={loading}/>
         </div>
     )

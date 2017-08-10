@@ -1,14 +1,19 @@
 import fetch from 'node-fetch';
 
+/* Performs the API call to retrieve the players
+*/
+
 const BASE_URL = 'http://NflArrest.com/api/v1/';
 const URL = {
     player: BASE_URL + 'player',
     team: BASE_URL + 'team'
 }
 
+/* Converts the 2 character position to the full position */
 const positions = {
     QB: "Quarterback",
     RB: "Running Back",
+    FB: "Fullback",
     WR: "Wide Receiver",
     TE: "Tight End",
     OT: "Offensive Tackle",
@@ -26,6 +31,8 @@ const resolvePosition = (pos) => {
         return pos;
     return positions[pos];
 }
+
+/* Will modify the data slightly to be more readable, then sort the data */
 const formatPlayerData = (data) => {
     data.forEach((p) => {
         const names = p.Name.split(" ");
@@ -36,6 +43,8 @@ const formatPlayerData = (data) => {
     });
     return data.sort((p1, p2) => p1.Name.localeCompare(p2.Name));
 }
+
+/* Performs the network call */
 const runFetch = (url) => {
     if (!url || !url.length)
         return Promise.reject("No url provided for fetch");
@@ -44,11 +53,13 @@ const runFetch = (url) => {
     return fetch(url).then((resp) => {
         if (!resp.ok) {
             console.log(`Error retrieving from ${url}: ${resp.statusText}`);
-            throw `Error retriving results: ${resp.statusText}`;
+            throw new Error(resp.statusText);
         }
         return resp.json();
     });
 }
+
+/* Simple functional methods for performing the search */
 const API = {
     performFetch: (url) => {
         return runFetch(url);
