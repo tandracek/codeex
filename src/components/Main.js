@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchResults from './SearchResults';
 import Modal from './Modal';
-import searchArtists from '../js/searcharrest';
+import API from '../js/searcharrest';
 import '../css/main.css';
 
 export default class MainContainer extends Component {
@@ -50,7 +50,7 @@ export default class MainContainer extends Component {
             this.setState({
                 loading: true
             });
-            searchArtists(value).then((data) => {
+            API.search(value).then((data) => {
                 this.setState({
                     results: data,
                     input: value,
